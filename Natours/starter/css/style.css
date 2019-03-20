@@ -1,12 +1,3 @@
-/*
-COLORS:
-
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
-
-*/
-
 /* use universal selector to start clean without browser's pre-defined styling. */
 * {
   margin: 0px;
@@ -53,11 +44,13 @@ element, which is why you need to set position:absolute on the header */
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .heading-primary {
   color: #fff;
   text-transform: uppercase;
+  margin-bottom: 60px;
 }
 
 .heading-primary-main {
@@ -65,10 +58,122 @@ element, which is why you need to set position:absolute on the header */
   font-size: 60px;
   font-weight: 700;
   letter-spacing: 35px;
+
+  /* These are the only animation properties that you need to make an animation work. */
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+
+  animation-timing-function: ease-out;
 }
+
 .heading-primary-sub {
   display: block;
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 17.5px;
+  animation: moveInRight 1s ease-out;
+}
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translate(-100px);
+  }
+
+  80% {
+    transform: translate(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translate(100px);
+  }
+
+  80% {
+    transform: translate(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0) ;
+  }
+}
+
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  border-radius: 100px;
+  transition: all .2s;
+  position: relative;
+}
+
+.btn:hover {
+  /* to go up, you must use a negative value in CSS */
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .2); 
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.btn-white {
+  background-color: #fff;
+  color: #777;
+}
+
+.btn::after {
+  /* content and display are always required for after sudo-elements.  */
+  content: '';
+  display: inline-block;
+  /* sudo-element will have 100% the height of the element. */
+  height: 100%; 
+  width: 100%;
+  border-radius: 100px;
+  /* this positioning references the parent element, which is btn in this case  */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn-white::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  transform: scale(1.5);
+  /* opacity will go to zero over the course of the transition time defined on the initial state*/
+  opacity: 0;
+}
+
+.btn-animated {
+  animation: moveInBottom .5s ease-out .75s; 
+  /* the below property will automatically apply the the styles of the 0% from the animation
+  before the animation starts (in the case of a delayed animation like we have here) */
+  animation-fill-mode: backwards;
 }
