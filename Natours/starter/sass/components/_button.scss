@@ -1,0 +1,62 @@
+.btn {
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all .2s;
+    position: relative;
+    font-size: 1.6rem;
+  }
+
+  &:hover {
+    /* to go up, you must use a negative value in CSS */
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba($color-black, .2); 
+
+    &::after {
+      transform: scale(1.5);
+      /* opacity will go to zero over the course of the transition time defined on the initial state*/
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &::after {
+    /* content and display are always required for after sudo-elements.  */
+    content: '';
+    display: inline-block;
+    /* sudo-element will have 100% the height of the element. */
+    height: 100%; 
+    width: 100%;
+    border-radius: 10rem;
+    /* this positioning references the parent element, which is btn in this case  */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &--animated {
+    animation: moveInBottom .5s ease-out .75s; 
+    /* the below property will automatically apply the the styles of the 0% from the animation
+    before the animation starts (in the case of a delayed animation like we have here) */
+    animation-fill-mode: backwards;
+  }
+}

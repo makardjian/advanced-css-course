@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: inherit;
+}
+
+html {
+  /* bad practice to hard code pixels for your font size because then the users
+  can't manually change the font-size on their browsers. By setting it to a %
+  CSS will take the default font size of 16 or whatever the user has setup as the
+  default on his screen. */
+  /* font-size: 10px; */
+  font-size: 62.5%
+}
+
+body {
+  box-sizing: border-box;
+}
+
